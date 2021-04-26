@@ -1,15 +1,20 @@
 package com.example.text.model;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.dao.PersonagemDAO;
 import com.example.text.R;
+import com.github.rtoshiro.util.format.SimpleMaskFormatter;
+import com.github.rtoshiro.util.format.text.MaskTextWatcher;
 
 
 import java.io.Serializable;
@@ -25,6 +30,22 @@ public class formularioPersonagem extends AppCompatActivity {
     private EditText campoNascimento;
     private final PersonagemDAO dao= new PersonagemDAO();
     private Personagem personagem;
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_formulario_personagem_menu_salvar, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int itemId=item.getItemId();
+        if (itemId==R.id.activity_formulario_personagem_menu_salvar){
+            finalizarFormulario();
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +86,14 @@ public class formularioPersonagem extends AppCompatActivity {
         campoNome= findViewById(R.id.editText_nome);
         campoAltura= findViewById(R.id.editText_altura);
         campoNascimento= findViewById(R.id.editText_nascimento);
+
+        SimpleMaskFormatter smfAltura=new SimpleMaskFormatter("N,NN");
+        MaskTextWatcher mtwAltura=new MaskTextWatcher(campoAltura, smfAltura);
+        campoAltura.addTextChangedListener(mtwAltura);
+
+        SimpleMaskFormatter smfNascimento=new SimpleMaskFormatter("NN/NN/NNNN");
+        MaskTextWatcher mtwNascimento=new MaskTextWatcher(campoNascimento, smfNascimento);
+        campoAltura.addTextChangedListener(mtwNascimento);
     }
 
     private void carregaPersonagem() {
