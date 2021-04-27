@@ -33,6 +33,7 @@ public class formularioPersonagem extends AppCompatActivity {
 
 
     @Override
+    //cria o menu para salvar
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_formulario_personagem_menu_salvar, menu);
         return super.onCreateOptionsMenu(menu);
@@ -40,13 +41,15 @@ public class formularioPersonagem extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        //Pega o Id e checa para ativar
         int itemId=item.getItemId();
         if (itemId==R.id.activity_formulario_personagem_menu_salvar){
             finalizarFormulario();
         }
         return super.onOptionsItemSelected(item);
     }
-
+    
+    //Inicia o formulario
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,6 +100,7 @@ public class formularioPersonagem extends AppCompatActivity {
     }
 
     private void carregaPersonagem() {
+        //carrega personagens feitos
         Intent dados= getIntent();
         if (dados.hasExtra(CHAVE_PERSONAGEM)){
             setTitle(TITULO_APPBAR_EDITA_PERSONAGEM);
@@ -109,6 +113,7 @@ public class formularioPersonagem extends AppCompatActivity {
     }
 
     private void preencheCampos() {
+        //Preenche campos vazios
         campoNome.setText(personagem.getNome());
         campoAltura.setText(personagem.getAltura());
         campoNascimento.setText(personagem.getNascimento());

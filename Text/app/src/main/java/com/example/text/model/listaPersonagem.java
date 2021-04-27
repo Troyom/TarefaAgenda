@@ -144,6 +144,7 @@ public class listaPersonagem extends AppCompatActivity{
         startActivity(vaiParaFormulario);
     }
 
+    //Cria a lista
     private void listaDePersonagens(ListView listaDePersonagens) {
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
         listaDePersonagens.setAdapter(adapter);
